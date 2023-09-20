@@ -6,4 +6,6 @@ module swing.model.components.main
 	requires menu.actions.main;
 	requires throwable;
 	requires swing.base.components.main;
+
+	exports io.github.astrapi69.swing.model.component;
 }
