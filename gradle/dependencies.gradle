@@ -1,25 +1,27 @@
-
 dependencies {
-    compileOnly("org.projectlombok:lombok:$lombokVersion")
-    annotationProcessor("org.projectlombok:lombok:$lombokVersion")
-    implementation("io.github.astrapi69:model-data:$modelDataVersion")
-    implementation("io.github.astrapi69:menu-action:$menuActionVersion")
-    implementation("io.github.astrapi69:throwable:$throwableVersion")
-    implementation("io.github.astrapi69:swing-base-components:$swingBaseComponentsVersion")
-    testCompileOnly("org.projectlombok:lombok:$lombokVersion")
-    testAnnotationProcessor("org.projectlombok:lombok:$lombokVersion")
-    testImplementation("io.github.astrapi69:silly-collection:$sillyCollectionVersion")
-    testImplementation("com.miglayout:miglayout-swing:$miglayoutSwingVersion")
-    testImplementation("io.github.astrapi69:silly-bean:$sillyBeanVersion")
-    testImplementation("io.github.astrapi69:awt-extensions:$awtExtensionsVersion")
-    testImplementation("io.github.astrapi69:component-model:$componentModelVersion")
-    testImplementation("io.github.astrapi69:silly-io:$sillyIoVersion")
-    testImplementation("io.github.astrapi69:file-worker:$fileWorkerVersion")
-    testImplementation("io.github.astrapi69:gradle-migration-data:$gradleMigrationDataVersion")
-    testImplementation("org.apache.commons:commons-text:$commonsTextVersion")
-    testImplementation("com.github.meanbeanlib:meanbean:$meanbeanVersion")
-    testImplementation("org.assertj:assertj-swing:$assertjSwingVersion")
-    testImplementation("io.github.astrapi69:junit-jupiter-extensions:$junitJupiterExtensionsVersion")
-    testImplementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+    compileOnly libs.lombok
+    annotationProcessor libs.lombok
+    testCompileOnly libs.lombok
+    testAnnotationProcessor libs.lombok
+
+    implementation libs.model.data
+    implementation libs.menu.action
+    implementation libs.throwable
+    implementation libs.swing.base.components
+
+    testImplementation libs.silly.collection
+    testImplementation libs.miglayout.swing
+    testImplementation libs.silly.bean
+    testImplementation libs.awt.extensions
+    testImplementation libs.component.model
+    testImplementation libs.silly.io
+    testImplementation libs.file.worker
+    testImplementation libs.gradle.migration.data
+    testImplementation libs.commons.text
+    testImplementation libs.assertj.swing
+    testImplementation libs.junit.jupiter.extensions
+    // Note: use of bundles...
+    testImplementation libs.bundles.unit.testing
+    testRuntimeOnly libs.junit.platform.launcher
 }
