@@ -4,7 +4,7 @@ module swing.model.components.main
 	requires model.data;
 	requires lombok;
 	requires menu.actions.main;
-	requires throwable;
+	requires io.github.astrapisixtynine.throwable;
 	requires swing.base.components.main;
 
 	exports io.github.astrapi69.swing.model.component;
