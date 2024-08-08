@@ -38,6 +38,10 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.experimental.FieldDefaults;
 
+/**
+ * The class {@link JMBigIntegerTextField} provides a text field component for handling
+ * {@link BigInteger} values.
+ */
 @Getter
 @EqualsAndHashCode(callSuper = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -45,7 +49,7 @@ public class JMBigIntegerTextField extends JMGenericTextField<BigInteger>
 {
 
 	/**
-	 * Constructs a new <code>TextField</code>.
+	 * Constructs a new <code>TextField</code> with the specified property model.
 	 *
 	 * @param propertyModel
 	 *            the text model to be displayed
@@ -61,6 +65,7 @@ public class JMBigIntegerTextField extends JMGenericTextField<BigInteger>
 	 */
 	public JMBigIntegerTextField()
 	{
+		super();
 	}
 
 	/**
@@ -75,11 +80,34 @@ public class JMBigIntegerTextField extends JMGenericTextField<BigInteger>
 		super(text);
 	}
 
+	/**
+	 * Constructs a new <code>TextField</code> initialized with the specified text and columns.
+	 *
+	 * @param text
+	 *            the text to be displayed, or <code>null</code>
+	 * @param columns
+	 *            the number of columns to use to calculate the preferred width
+	 */
 	public JMBigIntegerTextField(String text, int columns)
 	{
 		super(text, columns);
 	}
 
+	/**
+	 * Constructs a new <code>TextField</code> initialized with the specified columns.
+	 *
+	 * @param columns
+	 *            the number of columns to use to calculate the preferred width
+	 */
+	public JMBigIntegerTextField(int columns)
+	{
+		super(columns);
+	}
+
+	/**
+	 * Initializes the text field by setting a document that allows only number values and adding a
+	 * document listener.
+	 */
 	@Override
 	protected void onInitialize()
 	{
@@ -100,6 +128,13 @@ public class JMBigIntegerTextField extends JMGenericTextField<BigInteger>
 		});
 	}
 
+	/**
+	 * Converts the given text to a {@link BigInteger} object.
+	 *
+	 * @param text
+	 *            the text to convert
+	 * @return the converted {@link BigInteger} object
+	 */
 	@Override
 	public BigInteger toGenericObject(String text)
 	{
@@ -110,6 +145,13 @@ public class JMBigIntegerTextField extends JMGenericTextField<BigInteger>
 		return new BigInteger(text);
 	}
 
+	/**
+	 * Converts the given {@link BigInteger} object to its text representation.
+	 *
+	 * @param propertyModelObject
+	 *            the {@link BigInteger} object to convert
+	 * @return the text representation of the {@link BigInteger} object
+	 */
 	@Override
 	public String toText(BigInteger propertyModelObject)
 	{

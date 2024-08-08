@@ -37,6 +37,10 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.experimental.FieldDefaults;
 
+/**
+ * The class {@link JMBigDecimalTextField} provides a text field component for handling
+ * {@link BigDecimal} values.
+ */
 @Getter
 @EqualsAndHashCode(callSuper = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -44,7 +48,7 @@ public class JMBigDecimalTextField extends JMGenericTextField<BigDecimal>
 {
 
 	/**
-	 * Constructs a new <code>TextField</code>.
+	 * Constructs a new <code>TextField</code> with the specified property model.
 	 *
 	 * @param propertyModel
 	 *            the text model to be displayed
@@ -60,6 +64,7 @@ public class JMBigDecimalTextField extends JMGenericTextField<BigDecimal>
 	 */
 	public JMBigDecimalTextField()
 	{
+		super();
 	}
 
 	/**
@@ -74,11 +79,34 @@ public class JMBigDecimalTextField extends JMGenericTextField<BigDecimal>
 		super(text);
 	}
 
+	/**
+	 * Constructs a new <code>TextField</code> initialized with the specified text and columns.
+	 *
+	 * @param text
+	 *            the text to be displayed, or <code>null</code>
+	 * @param columns
+	 *            the number of columns to use to calculate the preferred width
+	 */
 	public JMBigDecimalTextField(String text, int columns)
 	{
 		super(text, columns);
 	}
 
+	/**
+	 * Constructs a new <code>TextField</code> initialized with the specified columns.
+	 *
+	 * @param columns
+	 *            the number of columns to use to calculate the preferred width
+	 */
+	public JMBigDecimalTextField(int columns)
+	{
+		super(columns);
+	}
+
+	/**
+	 * Initializes the text field by setting a document that allows only decimal number values and
+	 * adding a document listener.
+	 */
 	@Override
 	protected void onInitialize()
 	{
@@ -99,6 +127,13 @@ public class JMBigDecimalTextField extends JMGenericTextField<BigDecimal>
 		});
 	}
 
+	/**
+	 * Converts the given text to a {@link BigDecimal} object.
+	 *
+	 * @param text
+	 *            the text to convert
+	 * @return the converted {@link BigDecimal} object
+	 */
 	@Override
 	public BigDecimal toGenericObject(String text)
 	{
@@ -109,10 +144,16 @@ public class JMBigDecimalTextField extends JMGenericTextField<BigDecimal>
 		return new BigDecimal(text);
 	}
 
+	/**
+	 * Converts the given {@link BigDecimal} object to its text representation.
+	 *
+	 * @param propertyModelObject
+	 *            the {@link BigDecimal} object to convert
+	 * @return the text representation of the {@link BigDecimal} object
+	 */
 	@Override
 	public String toText(BigDecimal propertyModelObject)
 	{
 		return propertyModelObject != null ? propertyModelObject.toString() : "";
 	}
-
 }
