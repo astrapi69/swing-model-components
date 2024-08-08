@@ -24,27 +24,52 @@
  */
 package io.github.astrapi69.swing.model.component;
 
+import java.io.Serial;
+
 import javax.swing.text.BadLocationException;
 
 import io.github.astrapi69.swing.document.RegularExpressionDocument;
 import lombok.NonNull;
 
+/**
+ * The class {@link DecimalNumberValuesDocument} provides a document for text components that only
+ * allows decimal number values.
+ */
 public class DecimalNumberValuesDocument extends RegularExpressionDocument
 {
-	public static final String DEFAULT_REGEX = "^-?\\d*(\\.\\d*)?$"; // Updated regex to allow
-																		// partial input
+
+	/** The Constant serialVersionUID. */
+	@Serial
 	private static final long serialVersionUID = 1L;
 
+	/** The Constant for the default regular expression. */
+	public static final String DEFAULT_REGEX = "^-?\\d*(\\.\\d*)?$"; // Updated regex to allow
+																		// partial input
+
+	/**
+	 * Constructs a new <code>DecimalNumberValuesDocument</code> with the default regular
+	 * expression.
+	 */
 	public DecimalNumberValuesDocument()
 	{
 		this(DEFAULT_REGEX);
 	}
 
+	/**
+	 * Constructs a new <code>DecimalNumberValuesDocument</code> with the specified regular
+	 * expression.
+	 *
+	 * @param regex
+	 *            the regular expression to be used for validation
+	 */
 	public DecimalNumberValuesDocument(@NonNull String regex)
 	{
 		super(regex);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void insertString(int offs, String str, javax.swing.text.AttributeSet a)
 		throws BadLocationException
@@ -57,6 +82,9 @@ public class DecimalNumberValuesDocument extends RegularExpressionDocument
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void replace(int offset, int length, String text, javax.swing.text.AttributeSet attrs)
 		throws BadLocationException
@@ -70,6 +98,9 @@ public class DecimalNumberValuesDocument extends RegularExpressionDocument
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String validate(String proposedValue) throws IllegalArgumentException
 	{
@@ -79,7 +110,7 @@ public class DecimalNumberValuesDocument extends RegularExpressionDocument
 		}
 		else
 		{
-			throw new IllegalArgumentException("Value does not match the required format.");
+			throw new IllegalArgumentException("Value does not match the required format");
 		}
 	}
 }

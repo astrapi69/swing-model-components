@@ -36,6 +36,10 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.experimental.FieldDefaults;
 
+/**
+ * The class {@link JMIntegerTextField} provides a text field component for handling {@link Integer}
+ * values.
+ */
 @Getter
 @EqualsAndHashCode(callSuper = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -43,7 +47,7 @@ public class JMIntegerTextField extends JMGenericTextField<Integer>
 {
 
 	/**
-	 * Constructs a new <code>TextField</code>.
+	 * Constructs a new <code>JMIntegerTextField</code> with the specified property model.
 	 *
 	 * @param propertyModel
 	 *            the text model to be displayed
@@ -54,16 +58,17 @@ public class JMIntegerTextField extends JMGenericTextField<Integer>
 	}
 
 	/**
-	 * Constructs a new <code>TextField</code>. A default model is created, the initial string is
-	 * <code>null</code>, and the number of columns is set to 0.
+	 * Constructs a new <code>JMIntegerTextField</code>. A default model is created, the initial
+	 * string is <code>null</code>, and the number of columns is set to 0.
 	 */
 	public JMIntegerTextField()
 	{
+		super();
 	}
 
 	/**
-	 * Constructs a new <code>TextField</code> initialized with the specified text. A default model
-	 * is created and the number of columns is 0.
+	 * Constructs a new <code>JMIntegerTextField</code> initialized with the specified text. A
+	 * default model is created and the number of columns is 0.
 	 *
 	 * @param text
 	 *            the text to be displayed, or <code>null</code>
@@ -73,11 +78,36 @@ public class JMIntegerTextField extends JMGenericTextField<Integer>
 		super(text);
 	}
 
+	/**
+	 * Constructs a new <code>JMIntegerTextField</code> initialized with the specified text and
+	 * columns.
+	 *
+	 * @param text
+	 *            the text to be displayed, or <code>null</code>
+	 * @param columns
+	 *            the number of columns to use to calculate the preferred width
+	 */
 	public JMIntegerTextField(String text, int columns)
 	{
 		super(text, columns);
 	}
 
+	/**
+	 * Constructs a new <code>JMIntegerTextField</code> initialized with the specified columns.
+	 *
+	 * @param columns
+	 *            the number of columns to use to calculate the preferred width
+	 */
+	public JMIntegerTextField(int columns)
+	{
+		super();
+		setColumns(columns);
+	}
+
+	/**
+	 * Initializes the text field by setting a document that allows only number values and adding a
+	 * document listener.
+	 */
 	@Override
 	protected void onInitialize()
 	{
@@ -98,16 +128,29 @@ public class JMIntegerTextField extends JMGenericTextField<Integer>
 		});
 	}
 
+	/**
+	 * Converts the given text to an {@link Integer} object.
+	 *
+	 * @param text
+	 *            the text to convert
+	 * @return the converted {@link Integer} object
+	 */
 	@Override
 	public Integer toGenericObject(String text)
 	{
 		return Integer.valueOf(text);
 	}
 
+	/**
+	 * Converts the given {@link Integer} object to its text representation.
+	 *
+	 * @param propertyModelObject
+	 *            the {@link Integer} object to convert
+	 * @return the text representation of the {@link Integer} object
+	 */
 	@Override
 	public String toText(Integer propertyModelObject)
 	{
 		return propertyModelObject.toString();
 	}
-
 }

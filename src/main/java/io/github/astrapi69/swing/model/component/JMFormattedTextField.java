@@ -38,7 +38,8 @@ import lombok.NonNull;
 import lombok.experimental.FieldDefaults;
 
 /**
- * The class {@link JMFormattedTextField} provides a formatted text field component with an associated model.
+ * The class {@link JMFormattedTextField} provides a formatted text field component with an
+ * associated model.
  */
 @Getter
 @EqualsAndHashCode(callSuper = true)
@@ -50,7 +51,8 @@ public class JMFormattedTextField extends JFormattedTextField
 	IModel<String> propertyModel = BaseModel.of();
 
 	/**
-	 * Initializes the formatted text field and adds a document listener to update the model when the text changes.
+	 * Initializes the formatted text field and adds a document listener to update the model when
+	 * the text changes.
 	 */
 	{
 		getDocument().addDocumentListener(new DocumentListenerAdapter()
@@ -60,7 +62,7 @@ public class JMFormattedTextField extends JFormattedTextField
 			{
 				int currentLength = documentEvent.getDocument().getLength();
 				final String text = RuntimeExceptionDecorator
-						.decorate(() -> documentEvent.getDocument().getText(0, currentLength));
+					.decorate(() -> documentEvent.getDocument().getText(0, currentLength));
 				if (JMFormattedTextField.this.propertyModel != null)
 				{
 					JMFormattedTextField.this.propertyModel.setObject(text);
@@ -72,7 +74,8 @@ public class JMFormattedTextField extends JFormattedTextField
 	/**
 	 * Constructs a new <code>JMFormattedTextField</code> with the specified property model.
 	 *
-	 * @param propertyModel the text model to be displayed
+	 * @param propertyModel
+	 *            the text model to be displayed
 	 */
 	public JMFormattedTextField(final @NonNull IModel<String> propertyModel)
 	{
@@ -80,7 +83,8 @@ public class JMFormattedTextField extends JFormattedTextField
 	}
 
 	/**
-	 * Constructs a new <code>JMFormattedTextField</code>. A default model is created, the initial string is <code>null</code>, and the number of columns is set to 0.
+	 * Constructs a new <code>JMFormattedTextField</code>. A default model is created, the initial
+	 * string is <code>null</code>, and the number of columns is set to 0.
 	 */
 	public JMFormattedTextField()
 	{
@@ -88,9 +92,11 @@ public class JMFormattedTextField extends JFormattedTextField
 	}
 
 	/**
-	 * Constructs a new <code>JMFormattedTextField</code> initialized with the specified text. A default model is created and the number of columns is 0.
+	 * Constructs a new <code>JMFormattedTextField</code> initialized with the specified text. A
+	 * default model is created and the number of columns is 0.
 	 *
-	 * @param text the text to be displayed, or <code>null</code>
+	 * @param text
+	 *            the text to be displayed, or <code>null</code>
 	 */
 	public JMFormattedTextField(String text)
 	{
@@ -99,10 +105,13 @@ public class JMFormattedTextField extends JFormattedTextField
 	}
 
 	/**
-	 * Constructs a new <code>JMFormattedTextField</code> initialized with the specified text and columns.
+	 * Constructs a new <code>JMFormattedTextField</code> initialized with the specified text and
+	 * columns.
 	 *
-	 * @param text the text to be displayed, or <code>null</code>
-	 * @param columns the number of columns to use to calculate the preferred width
+	 * @param text
+	 *            the text to be displayed, or <code>null</code>
+	 * @param columns
+	 *            the number of columns to use to calculate the preferred width
 	 */
 	public JMFormattedTextField(String text, int columns)
 	{
@@ -114,7 +123,8 @@ public class JMFormattedTextField extends JFormattedTextField
 	/**
 	 * Constructs a new <code>JMFormattedTextField</code> initialized with the specified formatter.
 	 *
-	 * @param formatter the formatter to be used
+	 * @param formatter
+	 *            the formatter to be used
 	 */
 	public JMFormattedTextField(AbstractFormatter formatter)
 	{
@@ -124,7 +134,8 @@ public class JMFormattedTextField extends JFormattedTextField
 	/**
 	 * Constructs a new <code>JMFormattedTextField</code> initialized with the specified value.
 	 *
-	 * @param value the value to be displayed
+	 * @param value
+	 *            the value to be displayed
 	 */
 	public JMFormattedTextField(Object value)
 	{
@@ -134,7 +145,8 @@ public class JMFormattedTextField extends JFormattedTextField
 	/**
 	 * Sets the property model and updates the formatted text field's text.
 	 *
-	 * @param propertyModel the new property model
+	 * @param propertyModel
+	 *            the new property model
 	 * @return the current instance of {@link JMFormattedTextField}
 	 */
 	public JMFormattedTextField setPropertyModel(final @NonNull IModel<String> propertyModel)

@@ -37,6 +37,9 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.experimental.FieldDefaults;
 
+/**
+ * The class {@link JMPasswordField} provides a password field component with an associated model.
+ */
 @Getter
 @EqualsAndHashCode(callSuper = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -46,6 +49,10 @@ public class JMPasswordField extends JPasswordField
 	/** The model. */
 	IModel<char[]> propertyModel = BaseModel.of();
 
+	/**
+	 * Initializes the password field and adds a document listener to update the model when the text
+	 * changes.
+	 */
 	{
 		getDocument().addDocumentListener(new DocumentListenerAdapter()
 		{
@@ -66,7 +73,7 @@ public class JMPasswordField extends JPasswordField
 	}
 
 	/**
-	 * Constructs a new <code>TextField</code>.
+	 * Constructs a new <code>JMPasswordField</code> with the specified property model.
 	 *
 	 * @param propertyModel
 	 *            the text model to be displayed
@@ -77,16 +84,17 @@ public class JMPasswordField extends JPasswordField
 	}
 
 	/**
-	 * Constructs a new <code>TextField</code>. A default model is created, the initial string is
-	 * <code>null</code>, and the number of columns is set to 0.
+	 * Constructs a new <code>JMPasswordField</code>. A default model is created, the initial string
+	 * is <code>null</code>, and the number of columns is set to 0.
 	 */
 	public JMPasswordField()
 	{
+		super();
 	}
 
 	/**
-	 * Constructs a new <code>TextField</code> initialized with the specified text. A default model
-	 * is created and the number of columns is 0.
+	 * Constructs a new <code>JMPasswordField</code> initialized with the specified text. A default
+	 * model is created and the number of columns is 0.
 	 *
 	 * @param text
 	 *            the text to be displayed, or <code>null</code>
@@ -97,8 +105,8 @@ public class JMPasswordField extends JPasswordField
 	}
 
 	/**
-	 * Constructs a new empty <code>TextField</code> with the specified number of columns. A default
-	 * model is created and the initial string is set to <code>null</code>.
+	 * Constructs a new empty <code>JMPasswordField</code> with the specified number of columns. A
+	 * default model is created and the initial string is set to <code>null</code>.
 	 *
 	 * @param columns
 	 *            the number of columns to use to calculate the preferred width; if columns is set
@@ -111,14 +119,15 @@ public class JMPasswordField extends JPasswordField
 	}
 
 	/**
-	 * Constructs a new <code>TextField</code> initialized with the specified text and columns. A
-	 * default model is created.
+	 * Constructs a new <code>JMPasswordField</code> initialized with the specified text and
+	 * columns. A default model is created.
 	 *
 	 * @param text
 	 *            the text to be displayed, or <code>null</code>
 	 * @param columns
 	 *            the number of columns to use to calculate the preferred width; if columns is set
-	 *            to zero, the preferred width will be whatever naturally results from
+	 *            to zero, the preferred width will be whatever naturally results from the component
+	 *            implementation
 	 */
 	public JMPasswordField(String text, int columns)
 	{
@@ -126,9 +135,9 @@ public class JMPasswordField extends JPasswordField
 	}
 
 	/**
-	 * Constructs a new <code>JTextField</code> that uses the given text storage model and the given
-	 * number of columns. This is the constructor through which the other constructors feed. If the
-	 * document is <code>null</code>, a default model is created.
+	 * Constructs a new <code>JMPasswordField</code> that uses the given text storage model and the
+	 * given number of columns. This is the constructor through which the other constructors feed.
+	 * If the document is <code>null</code>, a default model is created.
 	 *
 	 * @param doc
 	 *            the text storage to use; if this is <code>null</code>, a default will be provided
@@ -136,7 +145,7 @@ public class JMPasswordField extends JPasswordField
 	 * @param text
 	 *            the initial string to display, or <code>null</code>
 	 * @param columns
-	 *            the number of columns to use to calculate the preferred width &gt;= 0; if
+	 *            the number of columns to use to calculate the preferred width &ge; 0; if
 	 *            <code>columns</code> is set to zero, the preferred width will be whatever
 	 *            naturally results from the component implementation
 	 * @throws IllegalArgumentException
@@ -147,6 +156,13 @@ public class JMPasswordField extends JPasswordField
 		super(doc, text, columns);
 	}
 
+	/**
+	 * Sets the property model and updates the password field's text.
+	 *
+	 * @param propertyModel
+	 *            the new property model
+	 * @return the current instance of {@link JMPasswordField}
+	 */
 	public JMPasswordField setPropertyModel(final @NonNull IModel<char[]> propertyModel)
 	{
 		this.propertyModel = propertyModel;

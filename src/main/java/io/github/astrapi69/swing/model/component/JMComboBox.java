@@ -25,6 +25,7 @@
 package io.github.astrapi69.swing.model.component;
 
 import java.awt.event.ItemEvent;
+
 import javax.swing.ComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.plaf.ComboBoxUI;
@@ -40,8 +41,10 @@ import lombok.experimental.FieldDefaults;
 /**
  * The class {@link JMComboBox} provides a combo box component with an associated model.
  *
- * @param <T> the type of the items in the combo box
- * @param <CMB> the type of the combo box model
+ * @param <T>
+ *            the type of the items in the combo box
+ * @param <CMB>
+ *            the type of the combo box model
  */
 @Getter
 @EqualsAndHashCode(callSuper = true)
@@ -52,12 +55,15 @@ public class JMComboBox<T, CMB extends ComboBoxModel<T>> extends JComboBox<T>
 	IModel<T> propertyModel = BaseModel.of();
 
 	/**
-	 * Initializes the combo box and adds an item listener to update the model when an item is selected.
+	 * Initializes the combo box and adds an item listener to update the model when an item is
+	 * selected.
 	 */
 	{
 		addItemListener(event -> {
-			if (event.getStateChange() == ItemEvent.SELECTED) {
-				T item = (T) event.getItem();
+			if (event.getStateChange() == ItemEvent.SELECTED)
+			{
+				@SuppressWarnings("unchecked")
+				T item = (T)event.getItem();
 				propertyModel.setObject(item);
 			}
 		});
@@ -66,7 +72,8 @@ public class JMComboBox<T, CMB extends ComboBoxModel<T>> extends JComboBox<T>
 	/**
 	 * Constructs a new <code>JMComboBox</code> with the specified combo box model.
 	 *
-	 * @param comboBoxModel the combo box model to be used
+	 * @param comboBoxModel
+	 *            the combo box model to be used
 	 */
 	public JMComboBox(CMB comboBoxModel)
 	{
@@ -74,10 +81,13 @@ public class JMComboBox<T, CMB extends ComboBoxModel<T>> extends JComboBox<T>
 	}
 
 	/**
-	 * Constructs a new <code>JMComboBox</code> with the specified combo box model and property model.
+	 * Constructs a new <code>JMComboBox</code> with the specified combo box model and property
+	 * model.
 	 *
-	 * @param comboBoxModel the combo box model to be used
-	 * @param propertyModel the property model to be used
+	 * @param comboBoxModel
+	 *            the combo box model to be used
+	 * @param propertyModel
+	 *            the property model to be used
 	 */
 	public JMComboBox(CMB comboBoxModel, IModel<T> propertyModel)
 	{
@@ -87,10 +97,13 @@ public class JMComboBox<T, CMB extends ComboBoxModel<T>> extends JComboBox<T>
 	}
 
 	/**
-	 * Constructs a new <code>JMComboBox</code> with the specified selected model object and combo box model.
+	 * Constructs a new <code>JMComboBox</code> with the specified selected model object and combo
+	 * box model.
 	 *
-	 * @param selectedModelObject the selected model object
-	 * @param comboBoxModel the combo box model to be used
+	 * @param selectedModelObject
+	 *            the selected model object
+	 * @param comboBoxModel
+	 *            the combo box model to be used
 	 */
 	public JMComboBox(T selectedModelObject, CMB comboBoxModel)
 	{
@@ -102,7 +115,8 @@ public class JMComboBox<T, CMB extends ComboBoxModel<T>> extends JComboBox<T>
 	/**
 	 * Constructs a new <code>JMComboBox</code> with an array of items.
 	 *
-	 * @param items the array of items to be used
+	 * @param items
+	 *            the array of items to be used
 	 */
 	public JMComboBox(T[] items)
 	{
@@ -112,8 +126,10 @@ public class JMComboBox<T, CMB extends ComboBoxModel<T>> extends JComboBox<T>
 	/**
 	 * Constructs a new <code>JMComboBox</code> with an array of items and a property model.
 	 *
-	 * @param items the array of items to be used
-	 * @param propertyModel the property model to be used
+	 * @param items
+	 *            the array of items to be used
+	 * @param propertyModel
+	 *            the property model to be used
 	 */
 	public JMComboBox(T[] items, IModel<T> propertyModel)
 	{
@@ -125,7 +141,8 @@ public class JMComboBox<T, CMB extends ComboBoxModel<T>> extends JComboBox<T>
 	/**
 	 * Constructs a new <code>JMComboBox</code> with no items and the specified property model.
 	 *
-	 * @param propertyModel the property model to be used
+	 * @param propertyModel
+	 *            the property model to be used
 	 */
 	public JMComboBox(IModel<T> propertyModel)
 	{
@@ -145,7 +162,8 @@ public class JMComboBox<T, CMB extends ComboBoxModel<T>> extends JComboBox<T>
 	/**
 	 * Constructs a new <code>JMComboBox</code> with a custom UI.
 	 *
-	 * @param ui the custom UI to be used
+	 * @param ui
+	 *            the custom UI to be used
 	 */
 	public JMComboBox(ComboBoxUI ui)
 	{
@@ -156,7 +174,8 @@ public class JMComboBox<T, CMB extends ComboBoxModel<T>> extends JComboBox<T>
 	/**
 	 * Sets the property model and updates the combo box's selected item.
 	 *
-	 * @param propertyModel the new property model
+	 * @param propertyModel
+	 *            the new property model
 	 * @return the current instance of {@link JMComboBox}
 	 */
 	public JMComboBox<T, CMB> setPropertyModel(final @NonNull IModel<T> propertyModel)

@@ -35,6 +35,10 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.experimental.FieldDefaults;
 
+/**
+ * The class {@link JMStringTextField} provides a text field component for handling {@link String}
+ * values.
+ */
 @Getter
 @EqualsAndHashCode(callSuper = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -42,7 +46,7 @@ public class JMStringTextField extends JMGenericTextField<String>
 {
 
 	/**
-	 * Constructs a new <code>TextField</code>.
+	 * Constructs a new <code>JMStringTextField</code> with the specified property model.
 	 *
 	 * @param propertyModel
 	 *            the text model to be displayed
@@ -53,16 +57,17 @@ public class JMStringTextField extends JMGenericTextField<String>
 	}
 
 	/**
-	 * Constructs a new <code>TextField</code>. A default model is created, the initial string is
-	 * <code>null</code>, and the number of columns is set to 0.
+	 * Constructs a new <code>JMStringTextField</code>. A default model is created, the initial
+	 * string is <code>null</code>, and the number of columns is set to 0.
 	 */
 	public JMStringTextField()
 	{
+		super();
 	}
 
 	/**
-	 * Constructs a new <code>TextField</code> initialized with the specified text. A default model
-	 * is created and the number of columns is 0.
+	 * Constructs a new <code>JMStringTextField</code> initialized with the specified text. A
+	 * default model is created and the number of columns is 0.
 	 *
 	 * @param text
 	 *            the text to be displayed, or <code>null</code>
@@ -72,11 +77,37 @@ public class JMStringTextField extends JMGenericTextField<String>
 		super(text);
 	}
 
+	/**
+	 * Constructs a new <code>JMStringTextField</code> initialized with the specified text and
+	 * columns. A default model is created.
+	 *
+	 * @param text
+	 *            the text to be displayed, or <code>null</code>
+	 * @param columns
+	 *            the number of columns to use to calculate the preferred width
+	 */
 	public JMStringTextField(String text, int columns)
 	{
 		super(text, columns);
 	}
 
+	/**
+	 * Constructs a new <code>JMStringTextField</code> initialized with the specified columns.
+	 *
+	 * @param columns
+	 *            the number of columns to use to calculate the preferred width
+	 */
+	public JMStringTextField(int columns)
+	{
+		super();
+		setColumns(columns);
+	}
+
+	/**
+	 * Initializes the text field by adding a document listener to update the model when the text
+	 * changes.
+	 */
+	@Override
 	protected void onInitialize()
 	{
 		getDocument().addDocumentListener(new DocumentListenerAdapter()
@@ -95,16 +126,29 @@ public class JMStringTextField extends JMGenericTextField<String>
 		});
 	}
 
+	/**
+	 * Converts the given text to a {@link String} object.
+	 *
+	 * @param text
+	 *            the text to convert
+	 * @return the converted {@link String} object
+	 */
 	@Override
 	public String toGenericObject(String text)
 	{
 		return text;
 	}
 
+	/**
+	 * Converts the given {@link String} object to its text representation.
+	 *
+	 * @param propertyModelObject
+	 *            the {@link String} object to convert
+	 * @return the text representation of the {@link String} object
+	 */
 	@Override
 	public String toText(String propertyModelObject)
 	{
 		return propertyModelObject;
 	}
-
 }
