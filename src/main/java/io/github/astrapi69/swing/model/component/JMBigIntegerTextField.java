@@ -1,7 +1,7 @@
 /**
  * The MIT License
  *
- * Copyright (C) 2015 Asterios Raptis
+ * Copyright (C) 2022 Asterios Raptis
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -81,7 +81,7 @@ public class JMBigIntegerTextField extends JMGenericTextField<BigInteger>
 	}
 
 	@Override
-	protected <T> void onInitialize()
+	protected void onInitialize()
 	{
 		setDocument(new NumberValuesDocument());
 		getDocument().addDocumentListener(new DocumentListenerAdapter()
@@ -103,13 +103,17 @@ public class JMBigIntegerTextField extends JMGenericTextField<BigInteger>
 	@Override
 	public BigInteger toGenericObject(String text)
 	{
+		if (text == null || text.isEmpty())
+		{
+			return BigInteger.ZERO;
+		}
 		return new BigInteger(text);
 	}
 
 	@Override
 	public String toText(BigInteger propertyModelObject)
 	{
-		return propertyModelObject.toString();
+		return propertyModelObject != null ? propertyModelObject.toString() : "";
 	}
 
 }

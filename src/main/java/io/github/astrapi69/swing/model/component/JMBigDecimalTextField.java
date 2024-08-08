@@ -24,10 +24,10 @@
  */
 package io.github.astrapi69.swing.model.component;
 
-import javax.swing.JFormattedTextField;
+import java.math.BigDecimal;
+
 import javax.swing.event.DocumentEvent;
 
-import io.github.astrapi69.model.BaseModel;
 import io.github.astrapi69.model.api.IModel;
 import io.github.astrapi69.swing.listener.document.DocumentListenerAdapter;
 import io.github.astrapi69.throwable.RuntimeExceptionDecorator;
@@ -40,28 +40,8 @@ import lombok.experimental.FieldDefaults;
 @Getter
 @EqualsAndHashCode(callSuper = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class JMFormattedTextField extends JFormattedTextField
+public class JMBigDecimalTextField extends JMGenericTextField<BigDecimal>
 {
-
-	/** The model. */
-	IModel<String> propertyModel = BaseModel.of();
-
-	{
-		getDocument().addDocumentListener(new DocumentListenerAdapter()
-		{
-			@Override
-			public void onDocumentChanged(final DocumentEvent documentEvent)
-			{
-				int currentLength = documentEvent.getDocument().getLength();
-				final String text = RuntimeExceptionDecorator
-					.decorate(() -> documentEvent.getDocument().getText(0, currentLength));
-				if (JMFormattedTextField.this.propertyModel != null)
-				{
-					JMFormattedTextField.this.propertyModel.setObject(text);
-				}
-			}
-		});
-	}
 
 	/**
 	 * Constructs a new <code>TextField</code>.
@@ -69,16 +49,16 @@ public class JMFormattedTextField extends JFormattedTextField
 	 * @param propertyModel
 	 *            the text model to be displayed
 	 */
-	public JMFormattedTextField(final @NonNull IModel<String> propertyModel)
+	public JMBigDecimalTextField(final @NonNull IModel<BigDecimal> propertyModel)
 	{
-		this.propertyModel = propertyModel;
+		super(propertyModel);
 	}
 
 	/**
 	 * Constructs a new <code>TextField</code>. A default model is created, the initial string is
 	 * <code>null</code>, and the number of columns is set to 0.
 	 */
-	public JMFormattedTextField()
+	public JMBigDecimalTextField()
 	{
 	}
 
@@ -89,23 +69,50 @@ public class JMFormattedTextField extends JFormattedTextField
 	 * @param text
 	 *            the text to be displayed, or <code>null</code>
 	 */
-	public JMFormattedTextField(String text)
+	public JMBigDecimalTextField(String text)
 	{
 		super(text);
-		this.propertyModel.setObject(text);
 	}
 
-	public JMFormattedTextField(String text, int columns)
+	public JMBigDecimalTextField(String text, int columns)
 	{
-		super(text);
-		setColumns(columns);
-		this.propertyModel.setObject(text);
+		super(text, columns);
 	}
 
-	public JMFormattedTextField setPropertyModel(final @NonNull IModel<String> propertyModel)
+	@Override
+	protected void onInitialize()
 	{
-		this.propertyModel = propertyModel;
-		setText(this.propertyModel.getObject());
-		return this;
+		setDocument(new DecimalNumberValuesDocument());
+		getDocument().addDocumentListener(new DocumentListenerAdapter()
+		{
+			@Override
+			public void onDocumentChanged(final DocumentEvent documentEvent)
+			{
+				int currentLength = documentEvent.getDocument().getLength();
+				final String text = RuntimeExceptionDecorator
+					.decorate(() -> documentEvent.getDocument().getText(0, currentLength));
+				if (JMBigDecimalTextField.this.getPropertyModel() != null)
+				{
+					JMBigDecimalTextField.this.getPropertyModel().setObject(toGenericObject(text));
+				}
+			}
+		});
 	}
+
+	@Override
+	public BigDecimal toGenericObject(String text)
+	{
+		if (text == null || text.isEmpty())
+		{
+			return BigDecimal.ZERO;
+		}
+		return new BigDecimal(text);
+	}
+
+	@Override
+	public String toText(BigDecimal propertyModelObject)
+	{
+		return propertyModelObject != null ? propertyModelObject.toString() : "";
+	}
+
 }

@@ -1,7 +1,7 @@
 /**
  * The MIT License
  *
- * Copyright (C) 2015 Asterios Raptis
+ * Copyright (C) 2022 Asterios Raptis
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -34,6 +34,13 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.experimental.FieldDefaults;
 
+/**
+ * The abstract class {@link JMGenericTextField} provides a text field component that is associated
+ * with a model.
+ *
+ * @param <T>
+ *            the type of the model object
+ */
 @Getter
 @EqualsAndHashCode(callSuper = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -44,15 +51,14 @@ public abstract class JMGenericTextField<T> extends JTextField
 	IModel<T> propertyModel = BaseModel.of();
 
 	/**
-	 * init block
+	 * Init block to call the {@link #onInitialize()} method.
 	 */
 	{
 		onInitialize();
 	}
 
-
 	/**
-	 * Constructs a new <code>TextField</code>.
+	 * Constructs a new <code>TextField</code> with the specified property model.
 	 *
 	 * @param propertyModel
 	 *            the text model to be displayed
@@ -68,6 +74,7 @@ public abstract class JMGenericTextField<T> extends JTextField
 	 */
 	public JMGenericTextField()
 	{
+		this("");
 	}
 
 	/**
@@ -83,13 +90,38 @@ public abstract class JMGenericTextField<T> extends JTextField
 		this.propertyModel.setObject(toGenericObject(text));
 	}
 
+	/**
+	 * Constructs a new <code>TextField</code> initialized with the specified text and columns.
+	 *
+	 * @param text
+	 *            the text to be displayed, or <code>null</code>
+	 * @param columns
+	 *            the number of columns to use to calculate the preferred width
+	 */
 	public JMGenericTextField(String text, int columns)
 	{
-		super(text);
-		setColumns(columns);
+		super(text, columns);
 		this.propertyModel.setObject(toGenericObject(text));
 	}
 
+	/**
+	 * Constructs a new <code>TextField</code> initialized with the specified columns.
+	 *
+	 * @param columns
+	 *            the number of columns to use to calculate the preferred width
+	 */
+	public JMGenericTextField(int columns)
+	{
+		this("", columns);
+	}
+
+	/**
+	 * Sets the property model and updates the text field with the model's text representation.
+	 *
+	 * @param propertyModel
+	 *            the new property model
+	 * @return the current instance of {@link JMGenericTextField}
+	 */
 	public JMGenericTextField setPropertyModel(final @NonNull IModel<T> propertyModel)
 	{
 		this.propertyModel = propertyModel;
@@ -97,10 +129,27 @@ public abstract class JMGenericTextField<T> extends JTextField
 		return this;
 	}
 
-	protected abstract <T> void onInitialize();
+	/**
+	 * Called during initialization.
+	 */
+	protected abstract void onInitialize();
 
+	/**
+	 * Converts the given text to the generic object type.
+	 *
+	 * @param text
+	 *            the text to convert
+	 * @return the converted object of type T
+	 */
 	public abstract T toGenericObject(String text);
 
+	/**
+	 * Converts the given property model object to its text representation.
+	 *
+	 * @param propertyModelObject
+	 *            the property model object to convert
+	 * @return the text representation of the property model object
+	 */
 	public abstract String toText(T propertyModelObject);
 
 }

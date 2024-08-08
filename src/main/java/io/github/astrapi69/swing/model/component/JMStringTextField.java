@@ -1,7 +1,7 @@
 /**
  * The MIT License
  *
- * Copyright (C) 2015 Asterios Raptis
+ * Copyright (C) 2022 Asterios Raptis
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -77,7 +77,7 @@ public class JMStringTextField extends JMGenericTextField<String>
 		super(text, columns);
 	}
 
-	protected <T> void onInitialize()
+	protected void onInitialize()
 	{
 		getDocument().addDocumentListener(new DocumentListenerAdapter()
 		{

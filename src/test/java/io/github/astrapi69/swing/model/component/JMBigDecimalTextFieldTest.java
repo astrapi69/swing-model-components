@@ -25,54 +25,38 @@
 package io.github.astrapi69.swing.model.component;
 
 import java.awt.Frame;
-import java.awt.GridBagLayout;
+import java.math.BigDecimal;
 
-import javax.swing.Icon;
 import javax.swing.JButton;
-import javax.swing.SwingConstants;
-import javax.swing.plaf.metal.MetalIconFactory;
 
 import io.github.astrapi69.awt.window.adapter.CloseWindow;
-import io.github.astrapi69.model.BaseModel;
-import io.github.astrapi69.swing.model.label.LabelModel;
+import io.github.astrapi69.collection.pair.ValueBox;
+import io.github.astrapi69.model.LambdaModel;
+import net.miginfocom.swing.MigLayout;
 
-public class JMLabelTest
+public class JMBigDecimalTextFieldTest
 {
 	public static void main(String[] args)
 	{
-		// Bind with JMLabel that encapsulate a property model
-		LabelModel labelModel;
-		final JMLabel label;
-		String initialText;
-		String otherText;
+		ValueBox<BigDecimal> valueBox = ValueBox.<BigDecimal> builder().value(BigDecimal.TEN)
+			.build();
+		// Bind with JMTextField that encapsulate a property model
+		JMBigDecimalTextField textFieldDecorator = new JMBigDecimalTextField(
+			valueBox.getValue().toString(), 20);
+		textFieldDecorator.setPropertyModel(LambdaModel.of(valueBox::getValue, valueBox::setValue));
 
-		initialText = "Label text";
-		otherText = "other Label text";
-		Icon icon = MetalIconFactory.getFileChooserHomeFolderIcon();
-		labelModel = LabelModel.builder().text(initialText)
-			.horizontalAlignment(SwingConstants.TRAILING).icon(icon).build();
-
-		label = new JMLabel(BaseModel.of(labelModel));
-
-		final Frame frame = new Frame("JMLabelTest");
-		JButton buttonCheck = new JButton("change text");
-		buttonCheck.addActionListener(e -> {
-			LabelModel modelObject = label.getPropertyModel().getObject();
-			if (modelObject.getText().equals(initialText))
-			{
-				modelObject.setText(otherText);
-			}
-			else
-			{
-				modelObject.setText(initialText);
-			}
-			label.setPropertyModel(BaseModel.of(modelObject));
+		final Frame frame = new Frame("JMIntegerTextFieldTest");
+		JButton button = new JButton("push it");
+		button.addActionListener(e -> {
+			BigDecimal modelObject = textFieldDecorator.getPropertyModel().getObject();
+			String text = textFieldDecorator.getText();
+			System.out.println(modelObject + "::" + text);
 		});
 		frame.addWindowListener(new CloseWindow());
 
-		frame.setLayout(new GridBagLayout());
-		frame.add(buttonCheck);
-		frame.add(label);
+		frame.setLayout(new MigLayout());
+		frame.add(button);
+		frame.add(textFieldDecorator);
 		frame.setSize(200, 200);
 		frame.setVisible(true);
 	}

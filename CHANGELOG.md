@@ -7,6 +7,7 @@ Version 1.1-SNAPSHOT
 ADDED:
 
 - new JMGenericTextField with data type BigInteger
+- new JMGenericTextField with data type BigDecimal
 - new libs.versions.toml file for new automatic catalog versions update
 
 CHANGED:

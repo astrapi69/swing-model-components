@@ -1,7 +1,7 @@
 /**
  * The MIT License
  *
- * Copyright (C) 2015 Asterios Raptis
+ * Copyright (C) 2022 Asterios Raptis
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -41,7 +41,7 @@ public class JMBigIntegerTextFieldTest
 		ValueBox<BigInteger> valueBox = ValueBox.<BigInteger> builder().value(BigInteger.TEN)
 			.build();
 		// Bind with JMTextField that encapsulate a property model
-		JMBigIntegerTextField textFieldDecorator = new JMBigIntegerTextField("0", 20);
+		JMBigIntegerTextField textFieldDecorator = new JMBigIntegerTextField("10", 20);
 		textFieldDecorator.setPropertyModel(LambdaModel.of(valueBox::getValue, valueBox::setValue));
 
 		final Frame frame = new Frame("JMIntegerTextFieldTest");
