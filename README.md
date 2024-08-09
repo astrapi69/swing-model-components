@@ -14,7 +14,8 @@
 
 </div>
 
-Legacy swing components with a model from module model-data
+This repository contains a set of custom Swing components that extend the basic functionality provided by the standard 
+Swing components. Additionally, there is a feature to save a `Model` object, which can be integrated into your application.
 
 > Please support this project by simply putting a Github <a class="github-button" href="https://github.com/astrapi69/swing-model-components" data-icon="octicon-star" aria-label="Star astrapi69/swing-model-components on GitHub">
 > Star ⭐</a>
@@ -23,6 +24,24 @@ Legacy swing components with a model from module model-data
 >
 > If you love this project
 > [![Donation](https://img.shields.io/badge/donate-❤-ff2244.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GVBTWLRAZ7HB8)
+
+## Components Overview
+
+Below is a brief description of each custom component provided:
+
+- **JMBigDecimalTextField**: A text field component specifically for handling `BigDecimal` input.
+- **JMBigIntegerTextField**: A text field component for handling `BigInteger` input.
+- **JMCheckBox**: A custom checkbox component.
+- **JMComboBox**: A combo box component with extended features.
+- **JMFormattedTextField**: A text field with formatted input.
+- **JMGenericTextField**: A generic text field that can be customized.
+- **JMIntegerTextField**: A text field specifically for integer input.
+- **JMLabel**: A custom label component.
+- **JMPasswordField**: A text field for entering passwords.
+- **JMSpinner**: A spinner component for selecting numbers.
+- **JMStringTextField**: A text field for handling string input.
+- **JMTextArea**: A custom text area component.
+- **JMTextField**: A general-purpose text field.
 
 ## Note
 
