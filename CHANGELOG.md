@@ -4,6 +4,9 @@
 Version 1.2-SNAPSHOT
 -------------
 
+ADDED:
+
+- new method getSelectedObject in class JMComboBox
 
 Version 1.1
 -------------

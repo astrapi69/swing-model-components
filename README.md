@@ -14,7 +14,7 @@
 
 </div>
 
-This repository contains a set of custom Swing components that extend the basic functionality provided by the standard 
+This repository contains a set of custom Swing components that extend the basic functionality provided by the standard
 Swing components. Additionally, there is a feature to save a `Model` object, which can be integrated into your application.
 
 > Please support this project by simply putting a Github <a class="github-button" href="https://github.com/astrapi69/swing-model-components" data-icon="octicon-star" aria-label="Star astrapi69/swing-model-components on GitHub">
