@@ -184,4 +184,16 @@ public class JMComboBox<T, CMB extends ComboBoxModel<T>> extends JComboBox<T>
 		getModel().setSelectedItem(this.propertyModel.getObject());
 		return this;
 	}
+
+	/**
+	 * Gets the current selected object
+	 *
+	 * @return the current selected Object
+	 * @see #setSelectedItem
+	 */
+	public T getSelectedObject()
+	{
+		return getPropertyModel().getObject();
+	}
+
 }
