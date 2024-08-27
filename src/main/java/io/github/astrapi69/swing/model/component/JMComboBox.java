@@ -28,6 +28,7 @@ import java.awt.event.ItemEvent;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.event.ListDataEvent;
 import javax.swing.plaf.ComboBoxUI;
 
 import io.github.astrapi69.model.BaseModel;
@@ -194,6 +195,21 @@ public class JMComboBox<T, CMB extends ComboBoxModel<T>> extends JComboBox<T>
 	public T getSelectedObject()
 	{
 		return getPropertyModel().getObject();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void contentsChanged(ListDataEvent e)
+	{
+		super.contentsChanged(e);
+		T selectedItem = (T)dataModel.getSelectedItem();
+		if (selectedItem != null && this.propertyModel != null
+			&& !selectedItem.equals(this.propertyModel.getObject()))
+		{
+			this.propertyModel.setObject(selectedItem);
+		}
 	}
 
 }
