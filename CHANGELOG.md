@@ -16,6 +16,7 @@ FIXED:
 
 - JMCheckBox threw a RuntimeException on every selection change because the PropertyModel expression 'model.selected' could not resolve the inherited getModel method; the property model is now a BaseModel that is synchronized in the item listener
 - the javadoc task excluded all classes and produced an empty javadoc jar
+- the assertj-swing robot tests killed the test JVM through the CloseWindow adapter (System.exit on windowClosed), so gradle reported them as skipped; the adapter was removed from the tests and the FrameFixture is now released with cleanUp, so the robot tests really run and pass on any display including Xvfb
 
 CHANGED:
 
@@ -25,6 +26,7 @@ CHANGED:
 - new gradle plugin org.gradle.toolchains.foojay-resolver-convention in version 1.0.0 for automatic JDK provisioning
 - Makefile no longer hardcodes JAVA_HOME
 - github-actions workflow: removed obsolete ossrh secrets, updated setup-gradle to v4 and codecov-action to v5
+- github-actions workflow runs the build under Xvfb, so the assertj-swing robot tests are executed in CI instead of being skipped
 - removed obsolete HELP.md template file
 
 - migrate publishing to Central Portal (snapshots to central.sonatype.com, signing with in-memory GPG keys from environment variables)
