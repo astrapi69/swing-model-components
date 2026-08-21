@@ -1,6 +1,35 @@
 ## Change log
 ----------------------
 
+Version 1.2-SNAPSHOT
+-------------
+
+ADDED:
+
+- new Makefile with build, test, release and publish targets
+- new license header file src/main/resources/license-header.txt for the spotless licenseHeaderFile step
+
+CHANGED:
+
+- migrate publishing to Central Portal (snapshots to central.sonatype.com, signing with in-memory GPG keys from environment variables)
+- update gradle to new version 9.7.0
+- remove of license-gradle-plugin, license headers are now managed by the spotless licenseHeaderFile step
+- update of gradle-plugin dependency 'io.freefair.lombok' to new version 9.5.0
+- update of gradle-plugin dependency 'com.diffplug.spotless:spotless-plugin-gradle' to new version 8.10.0
+- update of gradle-plugin dependency of io.github.ben-manes.versions to new version 0.61.0
+- update of gradle-plugin dependency 'org.ajoberstar.grgit' to new version 5.3.3
+- update of gradle-plugin dependency 'nl.littlerobots.version-catalog-update' to new version 1.1.1
+- update of dependency lombok to new version 1.18.46
+- update of dependency swing-base-components to new major version 5.1
+- update of dependency menu-action to new major version 4.1
+- update of test dependency awt-extensions to new major version 2.0
+- update of test dependency file-worker to new version 19.0
+- update of test dependency silly-collection to new version 28.1
+- update of test dependency silly-io to new version 3.6
+- update of test dependency miglayout-swing to new version 11.4.3
+- update of test dependency junit-jupiter to new major version 6.1.3
+- dependencies are now organized in bundles in the version catalog
+
 Version 1.1
 -------------
 
