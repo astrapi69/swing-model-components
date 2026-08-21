@@ -11,6 +11,11 @@ ADDED:
 - new component JMToggleButton with a boolean property model binding
 - new component JMSlider with an integer property model binding
 - new JMGenericTextField subclasses JMDoubleTextField, JMFloatTextField and JMLongTextField
+- new component JMList with a property model for the selected value and a model for all selected values
+- new component JMFileField, a composite of text field and browse button with a File property model binding
+- new component JMDateSpinner with a Date property model binding
+- new component JMProgressBar with an integer property model binding
+- new component JMColorButton that opens a JColorChooser dialog and binds the selected color to a Color property model
 - new headless model binding unit tests and demo classes for the new components
 - new Makefile with build, test, release and publish targets
 - new license header file src/main/resources/license-header.txt for the spotless licenseHeaderFile step
