@@ -50,9 +50,9 @@ CHANGED:
 - update of gradle-plugin dependency 'nl.littlerobots.version-catalog-update' to new version 1.1.1
 - update of dependency lombok to new version 1.18.46
 - update of dependency swing-base-components to new major version 5.1
-- update of dependency model-data to new version 3.2
+- update of dependency model-data to new patch version 3.2.1 that provides jdk-serializable-functional with the api scope, so the temporary explicit test dependency workaround was removed again
 - update of test dependency silly-bean to new major version 3.0
-- new test dependency org.danekja:jdk-serializable-functional in version 1.9.0, needed because model-data 3.2 declares it only with runtime scope but the LambdaModel method signatures reference its types
+- signing falls back to the local gpg command when the GPG_PRIVATE_KEY and GPG_PASSPHRASE environment variables are not set
 - update of dependency menu-action to new major version 4.1
 - update of test dependency awt-extensions to new major version 2.0
 - update of test dependency file-worker to new version 19.0
