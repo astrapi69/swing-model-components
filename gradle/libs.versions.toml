@@ -7,13 +7,14 @@ gradle-plugin-spotless-version = "8.10.0"
 gradle-plugin-version-catalog-update-version = "1.1.1"
 gradle-plugin-versions-version = "0.61.0"
 junit-jupiter-extensions-version = "2"
+jdk-serializable-functional-version = "1.9.0"
 junit-jupiter-version = "6.1.3"
 junit-platform-launcher-version = "6.1.3"
 lombok-version = "1.18.46"
 menu-action-version = "4.1"
 miglayout-swing-version = "11.4.3"
-model-data-version = "3.1"
-silly-bean-version = "2"
+model-data-version = "3.2"
+silly-bean-version = "3.0"
 silly-collection-version = "28.1"
 swing-base-components-version = "5.1"
 throwable-version = "3"
@@ -22,6 +23,7 @@ throwable-version = "3"
 assertj-swing = { module = "org.assertj:assertj-swing", version.ref = "assertj-swing-version" }
 awt-extensions = { module = "io.github.astrapi69:awt-extensions", version.ref = "awt-extensions-version" }
 component-model = { module = "io.github.astrapi69:component-model", version.ref = "component-model-version" }
+jdk-serializable-functional = { module = "org.danekja:jdk-serializable-functional", version.ref = "jdk-serializable-functional-version" }
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit-jupiter-version" }
 junit-jupiter-extensions = { module = "io.github.astrapi69:junit-jupiter-extensions", version.ref = "junit-jupiter-extensions-version" }
 junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junit-platform-launcher-version" }
@@ -67,6 +69,7 @@ unit-testing = [
     "assertj-swing",
     "awt-extensions",
     "component-model",
+    "jdk-serializable-functional",
     "junit-jupiter",
     "junit-jupiter-extensions",
     "miglayout-swing",
