@@ -6,6 +6,12 @@ Version 1.2-SNAPSHOT
 
 ADDED:
 
+- new component JMRadioButton with a boolean property model binding
+- new component JMRadioButtonGroup that binds a group of radio buttons to a single typed property model
+- new component JMToggleButton with a boolean property model binding
+- new component JMSlider with an integer property model binding
+- new JMGenericTextField subclasses JMDoubleTextField, JMFloatTextField and JMLongTextField
+- new headless model binding unit tests and demo classes for the new components
 - new Makefile with build, test, release and publish targets
 - new license header file src/main/resources/license-header.txt for the spotless licenseHeaderFile step
 - new headless unit tests for the model binding of JMComboBox, JMTextField, JMCheckBox, JMBigDecimalTextField and JMBigIntegerTextField that also run in CI
