@@ -1,7 +1,7 @@
 /**
  * The MIT License
  *
- * Copyright (C) 2022 Asterios Raptis
+ * Copyright (C) 2026 Asterios Raptis
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -22,40 +22,35 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package io.github.astrapi69.swing.model.component;
+package io.github.astrapi69.swing.model.component.test;
 
-import java.awt.Frame;
+import java.awt.FlowLayout;
 
-import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-import io.github.astrapi69.awt.window.adapter.CloseWindow;
 import io.github.astrapi69.collection.pair.ValueBox;
 import io.github.astrapi69.model.LambdaModel;
-import net.miginfocom.swing.MigLayout;
 
-public class JMIntegerTextFieldTest
+public class JMButtonDemo
 {
 	public static void main(String[] args)
 	{
-		ValueBox<Integer> valueBox = ValueBox.<Integer> builder().value(1).build();
-		// Bind with JMTextField that encapsulate a property model
-		JMIntegerTextField textFieldDecorator = new JMIntegerTextField("0", 20);
-		textFieldDecorator.setPropertyModel(LambdaModel.of(valueBox::getValue, valueBox::setValue));
+		JFrame frame = new JFrame("Custom Button Example");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(300, 200);
 
-		final Frame frame = new Frame("JMIntegerTextFieldTest");
-		JButton button = new JButton("push it");
-		button.addActionListener(e -> {
-			Integer modelObject = textFieldDecorator.getPropertyModel().getObject();
-			String text = textFieldDecorator.getText();
-			System.out.println(modelObject + "::" + text);
-		});
-		frame.addWindowListener(new CloseWindow());
+		JPanel panel = new JPanel();
+		panel.setLayout(new FlowLayout());
 
-		frame.setLayout(new MigLayout());
-		frame.add(button);
-		frame.add(textFieldDecorator);
-		frame.setSize(200, 200);
+		ValueBox<String> stringBox = ValueBox.<String> builder().value("foo").build();
+
+		JMButton customButton = new JMButton();
+
+		customButton.setPropertyModel(LambdaModel.of(stringBox::getValue, stringBox::setValue));
+		panel.add(customButton);
+
+		frame.add(panel);
 		frame.setVisible(true);
 	}
-
 }

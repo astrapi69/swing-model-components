@@ -33,30 +33,30 @@ import io.github.astrapi69.collection.array.ArrayFactory;
 import io.github.astrapi69.collection.pair.ValueBox;
 import io.github.astrapi69.model.LambdaModel;
 import io.github.astrapi69.model.api.IModel;
-import io.github.astrapi69.swing.model.combobox.GenericComboBoxModel;
+import io.github.astrapi69.swing.model.combobox.GenericMutableComboBoxModel;
 import net.miginfocom.swing.MigLayout;
 
-public class JMComboBoxTest
+public class JMComboBoxWithStringDemo
 {
 	public static void main(String[] args)
 	{
-		JMComboBox<Integer, GenericComboBoxModel<Integer>> comboBox;
-		GenericComboBoxModel<Integer> comboBoxModel;
-		ValueBox<Integer> valueBox;
-		IModel<Integer> selectedItemModel;
-		valueBox = ValueBox.<Integer> builder().value(3).build();
-		Integer[] cmbArray = ArrayFactory.newArray(1, 2, 3, 4);
-		comboBoxModel = new GenericComboBoxModel<>(cmbArray);
+		JMComboBox<String, GenericMutableComboBoxModel<String>> comboBox;
+		GenericMutableComboBoxModel<String> comboBoxModel;
+		ValueBox<String> valueBox;
+		IModel<String> selectedItemModel;
+		valueBox = ValueBox.<String> builder().value("2").build();
+		String[] cmbArray = ArrayFactory.newArray("1", "2", "3", "4");
 		selectedItemModel = LambdaModel.of(valueBox::getValue, valueBox::setValue);
+		comboBoxModel = new GenericMutableComboBoxModel<>(cmbArray, "2");
 
 		comboBox = new JMComboBox<>(comboBoxModel, selectedItemModel);
 
-		final Frame frame = new Frame("JMComboBoxTest");
+		final Frame frame = new Frame("JMComboBoxWithStringDemo");
 		JButton button = new JButton("push it");
 		button.addActionListener(e -> {
-			Integer selectedItem = comboBox.getPropertyModel().getObject();
+			String selectedItem = comboBox.getPropertyModel().getObject();
 			Object selectedObject = comboBox.getModel().getSelectedItem();
-			Integer value = valueBox.getValue();
+			String value = valueBox.getValue();
 			System.out.println(selectedItem + "::" + selectedObject + "::" + value);
 		});
 		frame.addWindowListener(new CloseWindow());

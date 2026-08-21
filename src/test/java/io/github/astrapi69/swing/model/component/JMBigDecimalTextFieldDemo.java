@@ -25,52 +25,40 @@
 package io.github.astrapi69.swing.model.component;
 
 import java.awt.Frame;
-import java.awt.GridBagLayout;
+import java.math.BigDecimal;
 
 import javax.swing.JButton;
 
 import io.github.astrapi69.awt.window.adapter.CloseWindow;
-import io.github.astrapi69.component.model.check.CheckedModel;
+import io.github.astrapi69.collection.pair.ValueBox;
 import io.github.astrapi69.model.LambdaModel;
-import io.github.astrapi69.model.api.IModel;
+import net.miginfocom.swing.MigLayout;
 
-public class JMCheckBoxTest
+public class JMBigDecimalTextFieldDemo
 {
 	public static void main(String[] args)
 	{
-		// Bind with JMCheckBox that encapsulate a property model
-		final JMCheckBox checkBox;
-		final CheckedModel checkedModelBean;
-		final IModel<Boolean> booleanModel;
+		ValueBox<BigDecimal> valueBox = ValueBox.<BigDecimal> builder().value(BigDecimal.TEN)
+			.build();
+		// Bind with JMTextField that encapsulate a property model
+		JMBigDecimalTextField textFieldDecorator = new JMBigDecimalTextField(
+			valueBox.getValue().toString(), 20);
+		textFieldDecorator.setPropertyModel(LambdaModel.of(valueBox::getValue, valueBox::setValue));
 
-		checkBox = new JMCheckBox("Check me");
-
-		checkedModelBean = CheckedModel.builder().build();
-		// checkedModelBean.setChecked(true);
-		booleanModel =
-			// PropertyModel.of(checkedModelBean, "checked");
-			LambdaModel.of(checkedModelBean::isChecked, checkedModelBean::setChecked);
-		checkBox.setPropertyModel(booleanModel);
-
-		final Frame frame = new Frame("JMCheckBoxTest");
-		JButton buttonCheck = new JButton("check it");
-		buttonCheck.addActionListener(e -> {
-			Boolean selected = checkBox.getPropertyModel().getObject();
-			Boolean checked = checkedModelBean.isChecked();
-			Boolean booleanModelObject = booleanModel.getObject();
-			Boolean toggledSelected = !checkBox.isSelected();
-			checkBox.setSelected(toggledSelected);
-			selected = checkBox.getPropertyModel().getObject();
-			booleanModelObject = booleanModel.getObject();
-			checked = checkedModelBean.isChecked();
-			System.out.println(selected);
+		final Frame frame = new Frame("JMBigDecimalTextFieldDemo");
+		JButton button = new JButton("push it");
+		button.addActionListener(e -> {
+			BigDecimal modelObject = textFieldDecorator.getPropertyModel().getObject();
+			String text = textFieldDecorator.getText();
+			System.out.println(modelObject + "::" + text);
 		});
 		frame.addWindowListener(new CloseWindow());
 
-		frame.setLayout(new GridBagLayout());
-		frame.add(buttonCheck);
-		frame.add(checkBox);
+		frame.setLayout(new MigLayout());
+		frame.add(button);
+		frame.add(textFieldDecorator);
 		frame.setSize(200, 200);
 		frame.setVisible(true);
 	}
+
 }

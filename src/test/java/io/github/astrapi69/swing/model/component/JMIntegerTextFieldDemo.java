@@ -27,32 +27,33 @@ package io.github.astrapi69.swing.model.component;
 import java.awt.Frame;
 
 import javax.swing.JButton;
-import javax.swing.JTextField;
 
 import io.github.astrapi69.awt.window.adapter.CloseWindow;
-import io.github.astrapi69.model.PropertyModel;
+import io.github.astrapi69.collection.pair.ValueBox;
+import io.github.astrapi69.model.LambdaModel;
 import net.miginfocom.swing.MigLayout;
 
-public class JTextFieldTest
+public class JMIntegerTextFieldDemo
 {
 	public static void main(String[] args)
 	{
-		// Bind legacy JTextField with a property model
-		JTextField textField = new JTextField("fff", 20);
+		ValueBox<Integer> valueBox = ValueBox.<Integer> builder().value(1).build();
+		// Bind with JMTextField that encapsulate a property model
+		JMIntegerTextField textFieldDecorator = new JMIntegerTextField("0", 20);
+		textFieldDecorator.setPropertyModel(LambdaModel.of(valueBox::getValue, valueBox::setValue));
 
-		final PropertyModel<String> propertyModel = PropertyModel.of(textField, "text");
-		final Frame frame = new Frame("JTextFieldTest");
+		final Frame frame = new Frame("JMIntegerTextFieldDemo");
 		JButton button = new JButton("push it");
 		button.addActionListener(e -> {
-			String modelObject = propertyModel.getObject();
-			String text = textField.getText();
+			Integer modelObject = textFieldDecorator.getPropertyModel().getObject();
+			String text = textFieldDecorator.getText();
 			System.out.println(modelObject + "::" + text);
 		});
 		frame.addWindowListener(new CloseWindow());
 
 		frame.setLayout(new MigLayout());
 		frame.add(button);
-		frame.add(textField);
+		frame.add(textFieldDecorator);
 		frame.setSize(200, 200);
 		frame.setVisible(true);
 	}

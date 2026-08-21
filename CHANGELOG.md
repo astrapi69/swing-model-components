@@ -8,8 +8,24 @@ ADDED:
 
 - new Makefile with build, test, release and publish targets
 - new license header file src/main/resources/license-header.txt for the spotless licenseHeaderFile step
+- new headless unit tests for the model binding of JMComboBox, JMTextField, JMCheckBox, JMBigDecimalTextField and JMBigIntegerTextField that also run in CI
+- new publishing repository configuration for the Central Portal (releases over the OSSRH staging API, snapshots to central.sonatype.com) with credentials from CENTRAL_USERNAME/CENTRAL_PASSWORD or the gradle properties centralUsername/centralPassword
+- new gradle file tagging.gradle with the tagRelease task based on a plain git Exec task
+
+FIXED:
+
+- JMCheckBox threw a RuntimeException on every selection change because the PropertyModel expression 'model.selected' could not resolve the inherited getModel method; the property model is now a BaseModel that is synchronized in the item listener
+- the javadoc task excluded all classes and produced an empty javadoc jar
 
 CHANGED:
+
+- interactive demo classes renamed from *Test to *Demo so that only real unit tests are discovered by the test engine
+- removed unused test dependencies commons-text, gradle-migration-data, silly-io, file-worker and meanbean
+- removed the grgit gradle plugin; the tagRelease task now uses a plain git Exec task, so the gradle configuration cache works without workarounds
+- new gradle plugin org.gradle.toolchains.foojay-resolver-convention in version 1.0.0 for automatic JDK provisioning
+- Makefile no longer hardcodes JAVA_HOME
+- github-actions workflow: removed obsolete ossrh secrets, updated setup-gradle to v4 and codecov-action to v5
+- removed obsolete HELP.md template file
 
 - migrate publishing to Central Portal (snapshots to central.sonatype.com, signing with in-memory GPG keys from environment variables)
 - update gradle to new version 9.7.0

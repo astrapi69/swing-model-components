@@ -1,7 +1,7 @@
 /**
  * The MIT License
  *
- * Copyright (C) 2026 Asterios Raptis
+ * Copyright (C) 2022 Asterios Raptis
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -22,35 +22,41 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package io.github.astrapi69.swing.model.component.test;
+package io.github.astrapi69.swing.model.component;
 
-import java.awt.FlowLayout;
+import java.awt.Frame;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.JButton;
 
+import io.github.astrapi69.awt.window.adapter.CloseWindow;
 import io.github.astrapi69.collection.pair.ValueBox;
 import io.github.astrapi69.model.LambdaModel;
+import net.miginfocom.swing.MigLayout;
 
-public class JMButtonTest
+public class JMStringTextFieldDemo
 {
 	public static void main(String[] args)
 	{
-		JFrame frame = new JFrame("Custom Button Example");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(300, 200);
-
-		JPanel panel = new JPanel();
-		panel.setLayout(new FlowLayout());
-
 		ValueBox<String> stringBox = ValueBox.<String> builder().value("foo").build();
+		// Bind with JMTextField that encapsulate a property model
+		JMStringTextField textFieldDecorator = new JMStringTextField("fff", 20);
+		textFieldDecorator
+			.setPropertyModel(LambdaModel.of(stringBox::getValue, stringBox::setValue));
 
-		JMButton customButton = new JMButton();
+		final Frame frame = new Frame("JMStringTextFieldDemo");
+		JButton button = new JButton("push it");
+		button.addActionListener(e -> {
+			String modelObject = textFieldDecorator.getPropertyModel().getObject();
+			String text = textFieldDecorator.getText();
+			System.out.println(modelObject + "::" + text);
+		});
+		frame.addWindowListener(new CloseWindow());
 
-		customButton.setPropertyModel(LambdaModel.of(stringBox::getValue, stringBox::setValue));
-		panel.add(customButton);
-
-		frame.add(panel);
+		frame.setLayout(new MigLayout());
+		frame.add(button);
+		frame.add(textFieldDecorator);
+		frame.setSize(200, 200);
 		frame.setVisible(true);
 	}
+
 }

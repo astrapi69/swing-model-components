@@ -1,7 +1,7 @@
 /**
  * The MIT License
  *
- * Copyright (C) 2022 Asterios Raptis
+ * Copyright (C) 2026 Asterios Raptis
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -24,39 +24,35 @@
  */
 package io.github.astrapi69.swing.model.component;
 
-import java.awt.Frame;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import javax.swing.JButton;
+import org.junit.jupiter.api.Test;
 
-import io.github.astrapi69.awt.window.adapter.CloseWindow;
-import io.github.astrapi69.collection.pair.ValueBox;
-import io.github.astrapi69.model.LambdaModel;
-import net.miginfocom.swing.MigLayout;
-
-public class JMTextFieldTest
+/**
+ * Headless unit tests for the model binding of {@link JMCheckBox}. These tests verify the
+ * propagation between the selection state and the property model without any UI robot interaction,
+ * so they also run in headless environments like CI
+ */
+public class JMCheckBoxModelBindingTest
 {
-	public static void main(String[] args)
+
+	/**
+	 * Test that a selection change propagates to the property model
+	 */
+	@Test
+	public void testSetSelectedUpdatesPropertyModel()
 	{
-		ValueBox<String> stringBox = ValueBox.<String> builder().value("foo").build();
-		// Bind with JMTextField that encapsulate a property model
-		JMTextField textFieldDecorator = new JMTextField("fff", 20);
-		textFieldDecorator
-			.setPropertyModel(LambdaModel.of(stringBox::getValue, stringBox::setValue));
+		JMCheckBox checkBox;
 
-		final Frame frame = new Frame("JMTextFieldTest");
-		JButton button = new JButton("push it");
-		button.addActionListener(e -> {
-			String modelObject = textFieldDecorator.getPropertyModel().getObject();
-			String text = textFieldDecorator.getText();
-			System.out.println(modelObject + "::" + text);
-		});
-		frame.addWindowListener(new CloseWindow());
+		checkBox = new JMCheckBox("check me");
 
-		frame.setLayout(new MigLayout());
-		frame.add(button);
-		frame.add(textFieldDecorator);
-		frame.setSize(200, 200);
-		frame.setVisible(true);
+		checkBox.setSelected(true);
+
+		assertEquals(Boolean.TRUE, checkBox.getPropertyModel().getObject());
+
+		checkBox.setSelected(false);
+
+		assertEquals(Boolean.FALSE, checkBox.getPropertyModel().getObject());
 	}
 
 }

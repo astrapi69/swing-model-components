@@ -25,38 +25,52 @@
 package io.github.astrapi69.swing.model.component;
 
 import java.awt.Frame;
+import java.awt.GridBagLayout;
 
 import javax.swing.JButton;
 
 import io.github.astrapi69.awt.window.adapter.CloseWindow;
-import io.github.astrapi69.collection.pair.ValueBox;
+import io.github.astrapi69.component.model.check.CheckedModel;
 import io.github.astrapi69.model.LambdaModel;
-import net.miginfocom.swing.MigLayout;
+import io.github.astrapi69.model.api.IModel;
 
-public class JMStringTextFieldTest
+public class JMCheckBoxDemo
 {
 	public static void main(String[] args)
 	{
-		ValueBox<String> stringBox = ValueBox.<String> builder().value("foo").build();
-		// Bind with JMTextField that encapsulate a property model
-		JMStringTextField textFieldDecorator = new JMStringTextField("fff", 20);
-		textFieldDecorator
-			.setPropertyModel(LambdaModel.of(stringBox::getValue, stringBox::setValue));
+		// Bind with JMCheckBox that encapsulate a property model
+		final JMCheckBox checkBox;
+		final CheckedModel checkedModelBean;
+		final IModel<Boolean> booleanModel;
 
-		final Frame frame = new Frame("JMTextFieldTest");
-		JButton button = new JButton("push it");
-		button.addActionListener(e -> {
-			String modelObject = textFieldDecorator.getPropertyModel().getObject();
-			String text = textFieldDecorator.getText();
-			System.out.println(modelObject + "::" + text);
+		checkBox = new JMCheckBox("Check me");
+
+		checkedModelBean = CheckedModel.builder().build();
+		// checkedModelBean.setChecked(true);
+		booleanModel =
+			// PropertyModel.of(checkedModelBean, "checked");
+			LambdaModel.of(checkedModelBean::isChecked, checkedModelBean::setChecked);
+		checkBox.setPropertyModel(booleanModel);
+
+		final Frame frame = new Frame("JMCheckBoxDemo");
+		JButton buttonCheck = new JButton("check it");
+		buttonCheck.addActionListener(e -> {
+			Boolean selected = checkBox.getPropertyModel().getObject();
+			Boolean checked = checkedModelBean.isChecked();
+			Boolean booleanModelObject = booleanModel.getObject();
+			Boolean toggledSelected = !checkBox.isSelected();
+			checkBox.setSelected(toggledSelected);
+			selected = checkBox.getPropertyModel().getObject();
+			booleanModelObject = booleanModel.getObject();
+			checked = checkedModelBean.isChecked();
+			System.out.println(selected);
 		});
 		frame.addWindowListener(new CloseWindow());
 
-		frame.setLayout(new MigLayout());
-		frame.add(button);
-		frame.add(textFieldDecorator);
+		frame.setLayout(new GridBagLayout());
+		frame.add(buttonCheck);
+		frame.add(checkBox);
 		frame.setSize(200, 200);
 		frame.setVisible(true);
 	}
-
 }
