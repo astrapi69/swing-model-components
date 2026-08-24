@@ -1,6 +1,13 @@
 ## Change log
 ----------------------
 
+Version 1.3
+-------------
+
+CHANGED:
+
+- update to jdk version 25
+
 Version 1.2
 -------------
 
