@@ -5,7 +5,7 @@
 [![Java CI with Gradle](https://github.com/astrapi69/swing-model-components/actions/workflows/gradle.yml/badge.svg)](https://github.com/astrapi69/swing-model-components/actions/workflows/gradle.yml)
 [![Coverage Status](https://codecov.io/gh/astrapi69/swing-model-components/branch/develop/graph/badge.svg)](https://codecov.io/gh/astrapi69/swing-model-components)
 [![Open Issues](https://img.shields.io/github/issues/astrapi69/swing-model-components.svg?style=flat)](https://github.com/astrapi69/swing-model-components/issues)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.astrapi69/swing-model-components/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.astrapi69/swing-model-components)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.astrapi69/swing-model-components.svg)](https://central.sonatype.com/artifact/io.github.astrapi69/swing-model-components)
 [![Javadocs](http://www.javadoc.io/badge/io.github.astrapi69/swing-model-components.svg)](http://www.javadoc.io/doc/io.github.astrapi69/swing-model-components)
 [![MIT License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](http://opensource.org/licenses/MIT)
 [![Donate](https://img.shields.io/badge/donate-❤-ff2244.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GVBTWLRAZ7HB8)
@@ -34,7 +34,7 @@ The source code comes under the liberal MIT License, making swing-model-componen
 
 ## gradle dependency
 
-Replace the variable ${latestVersion} with the current latest version: [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.astrapi69/swing-model-components/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.astrapi69/swing-model-components)
+Replace the variable ${latestVersion} with the current latest version: [![Maven Central](https://img.shields.io/maven-central/v/io.github.astrapi69/swing-model-components.svg)](https://central.sonatype.com/artifact/io.github.astrapi69/swing-model-components)
 
 You can first define the version in the ext section and add than the following gradle dependency to
 your project `build.gradle` if you want to import the core functionality of swing-model-components:
