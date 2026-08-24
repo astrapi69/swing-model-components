@@ -59,8 +59,8 @@ then add the dependency to the dependencies area
 
 ## Maven dependency
 
-Maven dependency is now on sonatype.
-Check out [sonatype repository](https://oss.sonatype.org/index.html#nexus-search;gav~io.github.astrapi69~swing-model-components~~~) for latest snapshots and releases.
+Maven dependency is on the Sonatype Central Portal.
+Check out the [Central Portal listing](https://central.sonatype.com/artifact/io.github.astrapi69/swing-model-components) for latest releases.
 
 Add the following maven dependency to your project `pom.xml` if you want to import the core
 functionality of swing-model-components:
