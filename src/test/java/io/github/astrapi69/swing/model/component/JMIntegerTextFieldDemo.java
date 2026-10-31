@@ -33,27 +33,27 @@ import io.github.astrapi69.collection.pair.ValueBox;
 import io.github.astrapi69.model.LambdaModel;
 import net.miginfocom.swing.MigLayout;
 
-public class JMTextAreaTest
+public class JMIntegerTextFieldDemo
 {
 	public static void main(String[] args)
 	{
-		ValueBox<String> stringBox = ValueBox.<String> builder().value("foo").build();
-		// Bind with JMTextArea that encapsulate a property model
-		JMTextArea textAreaDecorator = new JMTextArea(
-			LambdaModel.of(stringBox::getValue, stringBox::setValue));
+		ValueBox<Integer> valueBox = ValueBox.<Integer> builder().value(1).build();
+		// Bind with JMTextField that encapsulate a property model
+		JMIntegerTextField textFieldDecorator = new JMIntegerTextField("0", 20);
+		textFieldDecorator.setPropertyModel(LambdaModel.of(valueBox::getValue, valueBox::setValue));
 
-		final Frame frame = new Frame("JMTextAreaTest");
+		final Frame frame = new Frame("JMIntegerTextFieldDemo");
 		JButton button = new JButton("push it");
 		button.addActionListener(e -> {
-			String modelObject = textAreaDecorator.getPropertyModel().getObject();
-			String text = textAreaDecorator.getText();
+			Integer modelObject = textFieldDecorator.getPropertyModel().getObject();
+			String text = textFieldDecorator.getText();
 			System.out.println(modelObject + "::" + text);
 		});
 		frame.addWindowListener(new CloseWindow());
 
 		frame.setLayout(new MigLayout());
 		frame.add(button);
-		frame.add(textAreaDecorator);
+		frame.add(textFieldDecorator);
 		frame.setSize(200, 200);
 		frame.setVisible(true);
 	}

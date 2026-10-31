@@ -29,42 +29,33 @@ import java.awt.Frame;
 import javax.swing.JButton;
 
 import io.github.astrapi69.awt.window.adapter.CloseWindow;
-import io.github.astrapi69.collection.array.ArrayFactory;
 import io.github.astrapi69.collection.pair.ValueBox;
 import io.github.astrapi69.model.LambdaModel;
-import io.github.astrapi69.model.api.IModel;
-import io.github.astrapi69.swing.model.combobox.GenericMutableComboBoxModel;
 import net.miginfocom.swing.MigLayout;
 
-public class JMComboBoxWithStringTest
+public class JMPasswordFieldDemo
 {
 	public static void main(String[] args)
 	{
-		JMComboBox<String, GenericMutableComboBoxModel<String>> comboBox;
-		GenericMutableComboBoxModel<String> comboBoxModel;
-		ValueBox<String> valueBox;
-		IModel<String> selectedItemModel;
-		valueBox = ValueBox.<String> builder().value("2").build();
-		String[] cmbArray = ArrayFactory.newArray("1", "2", "3", "4");
-		selectedItemModel = LambdaModel.of(valueBox::getValue, valueBox::setValue);
-		comboBoxModel = new GenericMutableComboBoxModel<>(cmbArray, "2");
+		ValueBox<char[]> stringBox = ValueBox.<char[]> builder().value("foo".toCharArray()).build();
+		// Bind with JMTextField that encapsulate a property model
+		JMPasswordField textFieldDecorator = new JMPasswordField("fff", 20);
+		textFieldDecorator
+			.setPropertyModel(LambdaModel.of(stringBox::getValue, stringBox::setValue));
 
-		comboBox = new JMComboBox<>(comboBoxModel, selectedItemModel);
-
-		final Frame frame = new Frame("JMComboBoxTest");
+		final Frame frame = new Frame("JMPasswordFieldDemo");
 		JButton button = new JButton("push it");
 		button.addActionListener(e -> {
-			String selectedItem = comboBox.getPropertyModel().getObject();
-			Object selectedObject = comboBox.getModel().getSelectedItem();
-			String value = valueBox.getValue();
-			System.out.println(selectedItem + "::" + selectedObject + "::" + value);
+			char[] model = textFieldDecorator.getPropertyModel().getObject();
+			char[] password = textFieldDecorator.getPassword();
+			System.out.println(String.valueOf(model) + "::" + String.valueOf(password));
 		});
 		frame.addWindowListener(new CloseWindow());
 
 		frame.setLayout(new MigLayout());
 		frame.add(button);
-		frame.add(comboBox);
-		frame.setSize(400, 400);
+		frame.add(textFieldDecorator);
+		frame.setSize(200, 200);
 		frame.setVisible(true);
 	}
 

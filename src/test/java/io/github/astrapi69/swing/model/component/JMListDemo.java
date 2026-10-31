@@ -1,7 +1,7 @@
 /**
  * The MIT License
  *
- * Copyright (C) 2022 Asterios Raptis
+ * Copyright (C) 2026 Asterios Raptis
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -24,39 +24,33 @@
  */
 package io.github.astrapi69.swing.model.component;
 
+import java.awt.BorderLayout;
 import java.awt.Frame;
 
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
 
 import io.github.astrapi69.awt.window.adapter.CloseWindow;
-import io.github.astrapi69.collection.pair.ValueBox;
-import io.github.astrapi69.model.LambdaModel;
-import net.miginfocom.swing.MigLayout;
 
-public class JMPasswordFieldTest
+public class JMListDemo
 {
 	public static void main(String[] args)
 	{
-		ValueBox<char[]> stringBox = ValueBox.<char[]> builder().value("foo".toCharArray()).build();
-		// Bind with JMTextField that encapsulate a property model
-		JMPasswordField textFieldDecorator = new JMPasswordField("fff", 20);
-		textFieldDecorator
-			.setPropertyModel(LambdaModel.of(stringBox::getValue, stringBox::setValue));
+		final JMList<String> list = new JMList<>(
+			new String[] { "alpha", "beta", "gamma", "delta" });
 
-		final Frame frame = new Frame("JMPasswordFieldTest");
-		JButton button = new JButton("push it");
-		button.addActionListener(e -> {
-			char[] model = textFieldDecorator.getPropertyModel().getObject();
-			char[] password = textFieldDecorator.getPassword();
-			System.out.println(String.valueOf(model) + "::" + String.valueOf(password));
+		final Frame frame = new Frame("JMListDemo");
+		JButton buttonPrint = new JButton("print model values");
+		buttonPrint.addActionListener(e -> {
+			System.out.println("selected: " + list.getPropertyModel().getObject());
+			System.out.println("all selected: " + list.getSelectedItemsModel().getObject());
 		});
 		frame.addWindowListener(new CloseWindow());
 
-		frame.setLayout(new MigLayout());
-		frame.add(button);
-		frame.add(textFieldDecorator);
-		frame.setSize(200, 200);
+		frame.setLayout(new BorderLayout());
+		frame.add(new JScrollPane(list), BorderLayout.CENTER);
+		frame.add(buttonPrint, BorderLayout.SOUTH);
+		frame.setSize(240, 240);
 		frame.setVisible(true);
 	}
-
 }

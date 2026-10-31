@@ -36,7 +36,6 @@ import org.assertj.swing.fixture.FrameFixture;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import io.github.astrapi69.awt.window.adapter.CloseWindow;
 import io.github.astrapi69.collection.array.ArrayFactory;
 import io.github.astrapi69.collection.pair.ValueBox;
 import io.github.astrapi69.junit.jupiter.callback.before.test.IgnoreHeadlessExceptionExtension;
@@ -86,7 +85,6 @@ public class JMComboBoxWithComboBoxModelIModelTest
 		frame.setLayout(new MigLayout());
 		frame.add(button);
 		frame.add(componentToTest);
-		frame.addWindowListener(new CloseWindow());
 		frame.setSize(400, 400);
 		frame.setVisible(true);
 		underTest = new FrameFixture(frame);
@@ -107,6 +105,7 @@ public class JMComboBoxWithComboBoxModelIModelTest
 		assertEquals(propertyModelObject, componentToTest.getModel().getSelectedItem());
 		frame.setVisible(false);
 		frame.dispose();
+		underTest.cleanUp();
 		underTest = null;
 	}
 
