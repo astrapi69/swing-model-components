@@ -1,7 +1,7 @@
 /**
  * The MIT License
  *
- * Copyright (C) 2022 Asterios Raptis
+ * Copyright (C) 2026 Asterios Raptis
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -25,39 +25,31 @@
 package io.github.astrapi69.swing.model.component;
 
 import java.awt.Frame;
-import java.math.BigInteger;
-
-import javax.swing.JButton;
+import java.awt.GridLayout;
 
 import io.github.astrapi69.awt.window.adapter.CloseWindow;
-import io.github.astrapi69.collection.pair.ValueBox;
-import io.github.astrapi69.model.LambdaModel;
-import net.miginfocom.swing.MigLayout;
 
-public class JMBigIntegerTextFieldTest
+public class JMSliderDemo
 {
 	public static void main(String[] args)
 	{
-		ValueBox<BigInteger> valueBox = ValueBox.<BigInteger> builder().value(BigInteger.TEN)
-			.build();
-		// Bind with JMTextField that encapsulate a property model
-		JMBigIntegerTextField textFieldDecorator = new JMBigIntegerTextField("10", 20);
-		textFieldDecorator.setPropertyModel(LambdaModel.of(valueBox::getValue, valueBox::setValue));
+		final JMSlider slider = new JMSlider(0, 100, 50);
+		slider.setMajorTickSpacing(20);
+		slider.setMinorTickSpacing(5);
+		slider.setPaintTicks(true);
+		slider.setPaintLabels(true);
 
-		final Frame frame = new Frame("JMIntegerTextFieldTest");
-		JButton button = new JButton("push it");
-		button.addActionListener(e -> {
-			BigInteger modelObject = textFieldDecorator.getPropertyModel().getObject();
-			String text = textFieldDecorator.getText();
-			System.out.println(modelObject + "::" + text);
-		});
+		final JMLabel valueLabel = new JMLabel("50");
+		slider.addChangeListener(
+			e -> valueLabel.setText(String.valueOf(slider.getPropertyModel().getObject())));
+
+		final Frame frame = new Frame("JMSliderDemo");
 		frame.addWindowListener(new CloseWindow());
 
-		frame.setLayout(new MigLayout());
-		frame.add(button);
-		frame.add(textFieldDecorator);
-		frame.setSize(200, 200);
+		frame.setLayout(new GridLayout(2, 1));
+		frame.add(slider);
+		frame.add(valueLabel);
+		frame.setSize(320, 160);
 		frame.setVisible(true);
 	}
-
 }

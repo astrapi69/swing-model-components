@@ -1,7 +1,7 @@
 /**
  * The MIT License
  *
- * Copyright (C) 2022 Asterios Raptis
+ * Copyright (C) 2026 Asterios Raptis
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -24,37 +24,32 @@
  */
 package io.github.astrapi69.swing.model.component;
 
-import java.awt.Frame;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import javax.swing.JButton;
-import javax.swing.JTextField;
+import org.junit.jupiter.api.Test;
 
-import io.github.astrapi69.awt.window.adapter.CloseWindow;
-import io.github.astrapi69.model.PropertyModel;
-import net.miginfocom.swing.MigLayout;
-
-public class JTextFieldTest
+/**
+ * Headless unit tests for the model binding of {@link JMFloatTextField}. These tests verify the
+ * propagation between the document of the text field and the property model without any UI robot
+ * interaction, so they also run in headless environments like CI
+ */
+public class JMFloatTextFieldModelBindingTest
 {
-	public static void main(String[] args)
+
+	/**
+	 * Test that a text change propagates as {@link Float} to the property model
+	 */
+	@Test
+	public void testSetTextUpdatesPropertyModel()
 	{
-		// Bind legacy JTextField with a property model
-		JTextField textField = new JTextField("fff", 20);
+		JMFloatTextField textField;
 
-		final PropertyModel<String> propertyModel = PropertyModel.of(textField, "text");
-		final Frame frame = new Frame("JTextFieldTest");
-		JButton button = new JButton("push it");
-		button.addActionListener(e -> {
-			String modelObject = propertyModel.getObject();
-			String text = textField.getText();
-			System.out.println(modelObject + "::" + text);
-		});
-		frame.addWindowListener(new CloseWindow());
+		textField = new JMFloatTextField();
 
-		frame.setLayout(new MigLayout());
-		frame.add(button);
-		frame.add(textField);
-		frame.setSize(200, 200);
-		frame.setVisible(true);
+		textField.setText("3.14");
+
+		assertEquals("3.14", textField.getText());
+		assertEquals(Float.valueOf(3.14f), textField.getPropertyModel().getObject());
 	}
 
 }

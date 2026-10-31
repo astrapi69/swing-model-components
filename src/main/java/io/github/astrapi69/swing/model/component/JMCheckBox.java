@@ -28,7 +28,7 @@ import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JCheckBox;
 
-import io.github.astrapi69.model.PropertyModel;
+import io.github.astrapi69.model.BaseModel;
 import io.github.astrapi69.model.api.IModel;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
@@ -46,7 +46,7 @@ public class JMCheckBox extends JCheckBox
 {
 
 	/** The model. */
-	IModel<Boolean> propertyModel = PropertyModel.of(this, "model.selected");
+	IModel<Boolean> propertyModel = BaseModel.of(Boolean.FALSE);
 
 	/**
 	 * Initializes the checkbox and adds an item listener to update the model when the checkbox
@@ -60,6 +60,7 @@ public class JMCheckBox extends JCheckBox
 				propertyModel.setObject(JMCheckBox.this.isSelected());
 			}
 		});
+		propertyModel.setObject(isSelected());
 	}
 
 	/**
