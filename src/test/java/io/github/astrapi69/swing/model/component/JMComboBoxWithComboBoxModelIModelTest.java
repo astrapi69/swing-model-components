@@ -33,6 +33,7 @@ import javax.swing.ComboBoxModel;
 import javax.swing.JButton;
 
 import org.assertj.swing.fixture.FrameFixture;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -51,7 +52,28 @@ public class JMComboBoxWithComboBoxModelIModelTest
 {
 
 	private FrameFixture underTest;
+	private Frame frame;
 	private JMComboBox<Integer, GenericComboBoxModel<Integer>> componentToTest;
+
+	/**
+	 * Releases the screen lock the fixture's robot holds and disposes the frame, also when the test
+	 * failed before its end; otherwise the next {@link FrameFixture} of the suite waits for the
+	 * lock forever (#2)
+	 */
+	@AfterEach
+	public void tearDown()
+	{
+		if (underTest != null)
+		{
+			underTest.cleanUp();
+			underTest = null;
+		}
+		if (frame != null)
+		{
+			frame.dispose();
+			frame = null;
+		}
+	}
 
 	/**
 	 * Test method for component constructor {@link JMComboBox#JMComboBox(ComboBoxModel, IModel)}
@@ -80,7 +102,7 @@ public class JMComboBoxWithComboBoxModelIModelTest
 		JButton button = new JButton("push it");
 		button.setName(buttonName);
 
-		final Frame frame = new Frame("TestFrame");
+		frame = new Frame("TestFrame");
 
 		frame.setLayout(new MigLayout());
 		frame.add(button);
@@ -103,10 +125,6 @@ public class JMComboBoxWithComboBoxModelIModelTest
 		assertEquals(propertyModelObject, 2);
 		assertEquals(propertyModelObject, valueBox.getValue());
 		assertEquals(propertyModelObject, componentToTest.getModel().getSelectedItem());
-		frame.setVisible(false);
-		frame.dispose();
-		underTest.cleanUp();
-		underTest = null;
 	}
 
 }
