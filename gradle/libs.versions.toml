@@ -16,7 +16,7 @@ miglayout-swing-version = "11.4.3"
 model-data-version = "3.2.1"
 silly-bean-version = "3.0"
 silly-collection-version = "28.1"
-swing-base-components-version = "5.1"
+swing-base-components-version = "5.2.1"
 throwable-version = "3"
 
 [libraries]
